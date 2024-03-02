@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body, html, table {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border-collapse: collapse;
+    font-family: "Roboto", "Arial", sans-serif;
+}
+
+/* PRE */
+
+.text-center {
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-nodec {
+    text-decoration: none;
+    color: black;
+}
+
+/* STYLES */
+
+body {
+    background-color: #161616;
+}
+
+
+/* HEADER */
+.header {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    background-color: #BB000E;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+}
+
+.logo {
+    width: 75px;
+}
+
+.logocl {
+    padding-left: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.aboutb {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.aboutb > p:hover {
+    background-color: rgb(192, 191, 191);
+}
+
+.aboutb > p {
+    padding: 10px;
+    background-color: rgb(237, 237, 237);
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* CONTENT */
+
+.content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.hello {
+    padding-top: 20px;
+    background-image: url("public/ceep.jpg");
+    width: 100%;
+    
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+}
+
+.title {
+    justify-content: center;
+    display: flex;
+}
+
+.ttitle {
+    color: white;
+}
+
+.title_lg {
+    width: 170px;
+}
+
+.buttonsT {
+    display: flex;
+    justify-content: center;
+}
+
+.buttonsL {
+    display: flex;
+    justify-content: center;
+}
+
+.bcur {
+    margin-right: 15px;
+    padding: 15px;
+    background-color: #E31C25;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+    color: white
+}
+
+.learn {
+    width: 30px;
+    padding-right: 5px;
+    padding-top: 2px;
+}
+
+.bcur:hover {
+    background-color: #c7161f;
+}
+
+.beve {
+    margin-right: 15px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.beve:hover {
+    background-color: rgb(208, 208, 208);
+}
+
+.event {
+    width: 30px;
+    padding-right: 5px;
+}
+
+/* SUBCONTENT */
+
+.subcontent {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    width: 100%;
+}
+
+.profs {
+    width: 100%;
+    display: flex;
+}
+
+.cardtable {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.prtitle {
+    color: white;
+    font-size: 25px;
+}
+
+.prstitle {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    background-color: #1C1C1C;
+    display: flex;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+    width: 350px;
+}
+
+.cardimg {
+    width: 100px;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.cardtitle {
+    color: white;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
+
+.carddesc {
+    color: white;
+    padding-left: 5px;
+    padding-bottom: 5px;
+}
