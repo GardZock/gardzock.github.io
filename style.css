@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-body, html, table {
+body,
+html,
+table {
     height: 100%;
     width: 100%;
     margin: 0px;
@@ -8,6 +10,11 @@ body, html, table {
     border-collapse: collapse;
     font-family: "Roboto", "Arial", sans-serif;
 }
+
+body {
+    background-color: #161616;
+}
+
 
 /* PRE */
 
@@ -24,17 +31,9 @@ body, html, table {
     color: black;
 }
 
-/* STYLES */
-
-body {
-    background-color: #161616;
-}
-
-
 /* HEADER */
 .header {
     display: flex;
-    width: 100%;
     align-items: center;
     background-color: #BB000E;
     box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
@@ -46,7 +45,6 @@ body {
 
 .logocl {
     padding-left: 10px;
-    width: 100%;
     align-items: center;
 }
 
@@ -75,14 +73,13 @@ body {
 .content {
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
 .hello {
     padding-top: 20px;
     background-image: url("public/ceep.jpg");
     width: 100%;
-    
+
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -156,20 +153,14 @@ body {
 /* SUBCONTENT */
 
 .subcontent {
-    display: flex;
-    justify-content: center;
     padding-top: 20px;
-    width: 100%;
 }
 
 .profs {
-    width: 100%;
     display: flex;
 }
 
 .cardtable {
-    width: 100%;
-    display: flex;
     justify-content: center;
 }
 
@@ -182,10 +173,10 @@ body {
     display: flex;
     justify-content: center;
     margin: 16px;
+    margin-bottom: 50px;
 }
 
 .cards {
-    display: flex;
     justify-content: center;
 }
 
@@ -194,17 +185,58 @@ body {
     display: flex;
     padding: 15px;
     margin-bottom: 5px;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
     border-radius: 15px;
-    width: 350px;
+    width: 300px;
     transition: transform 0.3s ease;
 }
 
-.card:hover {
-    transform: scale(1.1);
-  }
+
+
+@media only screen and (min-width: 768px) {
+    /* DESKTOP */
+    .card:hover {
+        transform: scale(1.1);
+    }
+
+    .card {
+        background-color: #272727;
+        display: flex;
+        padding: 15px;
+        margin-bottom: 5px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 10px;
+        border-radius: 15px;
+        width: 350px;
+        transition: transform 0.3s ease;
+    }
+    .prstitle {
+        display: flex;
+        justify-content: center;
+        margin: 16px;
+    }
+    .subcontent {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+        width: 100%;
+    }
+
+    .cardtable {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .cards {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
 
 .cardimg {
     width: 100px;
