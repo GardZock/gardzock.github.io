@@ -56,14 +56,13 @@ body {
     justify-content: right;
     margin-right: 10px;
     align-items: center;
-    cursor: pointer;
 }
 
-.aboutb > p:hover {
+.aboutbut:hover {
     background-color: rgb(192, 191, 191);
 }
 
-.aboutb > p {
+.aboutbut {
     padding: 10px;
     background-color: rgb(237, 237, 237);
     font-size: 18px;
@@ -101,6 +100,7 @@ body {
 
 .title_lg {
     width: 170px;
+    pointer-events: none;
 }
 
 .buttonsT {
@@ -190,18 +190,27 @@ body {
 }
 
 .card {
-    background-color: #1C1C1C;
+    background-color: #272727;
     display: flex;
     padding: 15px;
-    margin: 10px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
     border-radius: 15px;
     width: 350px;
+    transition: transform 0.3s ease;
 }
+
+.card:hover {
+    transform: scale(1.1);
+  }
 
 .cardimg {
     width: 100px;
     border-radius: 20px;
     padding: 5px;
+    pointer-events: none;
 }
 
 .cardtitle {
