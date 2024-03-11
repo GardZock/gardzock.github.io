@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body,
+html,
+table {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    border-collapse: collapse;
+    font-family: "Roboto", "Arial", sans-serif;
+}
+
+body {
+    background-color: #161616;
+}
+
+
+/* PRE */
+
+.text-center {
+    text-align: center;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.text-nodec {
+    text-decoration: none;
+    color: black;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #BB000E;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: #BB000E;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+}
+
+.logo {
+    width: 75px;
+}
+
+.logocl {
+    padding-left: 10px;
+    align-items: center;
+}
+
+.aboutb {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    margin-right: 10px;
+    align-items: center;
+}
+
+.aboutbut:hover {
+    background-color: rgb(192, 191, 191);
+}
+
+.aboutbut {
+    padding: 10px;
+    background-color: rgb(237, 237, 237);
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+    /* DESKTOP */
+    header {
+        display: flex;
+        align-items: center;
+        background-color: #BB000E;
+        box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+    }
+    .header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        background-color: #BB000E;
+        box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
+    }
+}
