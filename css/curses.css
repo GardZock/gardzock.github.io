@@ -13,13 +13,13 @@ main > h1 {
     margin-right: 15px;
 }
 
-.list {
+.clist {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.list > li {
+.clist > li {
     background-color: #1d1d1d;
     padding: 5px;
     padding-left: 35px;
@@ -54,11 +54,11 @@ main > h1 {
     .in > a {
         margin-left: auto;
     }
-    .list {
+    .clist {
         display: flex;
     }
 
-    .list > li {
+    .clist > li {
         margin-bottom: 0;
         margin-right: 15px;
         width: 350px;

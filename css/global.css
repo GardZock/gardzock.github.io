@@ -13,6 +13,9 @@ table {
 
 body {
     background-color: #161616;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -48,6 +51,11 @@ header {
     box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
 }
 
+.headbut {
+    display: flex;
+    list-style: none;
+}
+
 .logo {
     width: 75px;
 }
@@ -75,6 +83,8 @@ header {
     font-size: 18px;
     border-radius: 10px;
     cursor: pointer;
+    margin-right: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
 }
 
 @media only screen and (min-width: 768px) {
@@ -92,4 +102,65 @@ header {
         background-color: #BB000E;
         box-shadow: rgba(0, 0, 0, 0.35) 5px 5px 15px;
     }
+}
+
+
+/* FOOTER */
+
+footer {
+    display: flex;
+    align-items: center;
+    background-color: #0d0d0d;
+    padding: 25px;
+    margin-top: auto
+}
+
+footer > h1 {
+    font-size: 18px;
+    color: #757575;
+}
+
+.list {
+    list-style: none;
+    display: flex;
+    margin-left: auto;
+}
+
+.socialsbut {
+    display: flex;
+    align-items: center;
+}
+
+.socialsimg {
+    width: 30px;
+    padding-right: 15px;
+    filter: invert(50%) sepia(0%) saturate(38%) hue-rotate(176deg) brightness(91%) contrast(93%);
+}
+.email {
+    margin-top: 3px;
+}
+
+@media only screen and (min-width: 768px) {
+    /* DESKTOP */
+
+    .socialsbut {
+        display: flex;
+        align-items: center;
+    }
+
+    .socialsimg {
+        width: 30px;
+    }
+
+    .list {
+        list-style: none;
+        display: flex;
+    }
+    
+
+    footer > h1 {
+        font-size: 18px;
+        color: #757575;
+    }
+    
 }
