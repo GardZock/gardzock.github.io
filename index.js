@@ -28,7 +28,8 @@ async function detectFaces(model) {
     
     if (predictions.length > 0) {
         predictions.forEach(prediction => {
-            const [topLeft, topRight, bottomRight, bottomLeft] = prediction.boundingBox;
+            const topLeft = prediction.boundingBox.topLeft;
+            const bottomRight = prediction.boundingBox.bottomRight;
             context.strokeStyle = 'red';
             context.strokeRect(topLeft[0], topLeft[1], 
                                bottomRight[0] - topLeft[0], 
