@@ -4,24 +4,14 @@ body {
     box-sizing: border-box;
     height: 100vh;
     background: #2f2f2f;
-}
-
-.container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-.video-wrapper {
+.container {
     position: relative;
-    width: 500px;
-    height: 500px;
-}
-
-video {
-    position: absolute;
-    top: 0;
-    left: 0;
+    margin-top: 20px;
 }
 
 canvas {
@@ -30,26 +20,11 @@ canvas {
     left: 0;
 }
 
-.overlay {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-    z-index: 1;
-}
-
-.overlay div {
-    margin: 5px 0;
-    font-size: 16px;
-}
-
 header {
     background: #42a5f5;
     color: white;
     text-align: center;
     padding: 1rem;
     font-size: 2rem;
+    width: 100%;
 }
