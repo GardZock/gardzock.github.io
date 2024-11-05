@@ -20,7 +20,7 @@ async function startVideo() {
 // Add event listener for video playing
 video.addEventListener("playing", () => {
     const canvas = faceapi.createCanvasFromMedia(video);
-    document.body.append(canvas);
+    document.querySelector('.video-wrapper').appendChild(canvas);
     const displaySize = { width: video.width, height: video.height };
     faceapi.matchDimensions(canvas, displaySize);
 
@@ -36,7 +36,7 @@ video.addEventListener("playing", () => {
         faceapi.draw.drawFaceLandmarks(canvas, resizedDetections);
 
         if (resizedDetections) {
-            document.getElementById("age").innerText = `Age: ${resizedDetections.age}`;
+            document.getElementById("age").innerText = `Age: ${Math.round(resizedDetections.age)}`;
             document.getElementById("gender").innerText = `Gender: ${resizedDetections.gender}`;
             document.getElementById("emotion").innerText = `Emotion: ${Object.keys(resizedDetections.expressions).reduce((a, b) => resizedDetections.expressions[a] > resizedDetections.expressions[b] ? a : b)}`;
         }
