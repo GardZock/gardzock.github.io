@@ -1,114 +1,122 @@
 const video = document.getElementById("video");
 
-Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-    faceapi.nets.faceExpressionNet.loadFromUri('/models'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-    faceapi.nets.ageGenderNet.loadFromUri('/models'),
-    faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
-]).then(startVideo);
+async function loadFaceApiModels() {
+    await Promise.all([
+        faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
+        faceapi.nets.faceExpressionNet.loadFromUri('/models'),
+        faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
+        faceapi.nets.ageGenderNet.loadFromUri('/models'),
+        faceapi.nets.ssdMobilenetv1.loadFromUri('/models'),
+    ]);
+}
 
 async function startVideo() {
+    const constraints = {
+        video: {
+            facingMode: "user",
+            width: { min: 640, ideal: 1280, max: 1920 },
+            height: { min: 480, ideal: 720, max: 1080 }
+        }
+    };
+
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-            video: {
-                facingMode: "user",
-                width: { min: 640, ideal: 1280, max: 1920 },
-                height: { min: 480, ideal: 720, max: 1080 }
-            }
-        });
+        const stream = await navigator.mediaDevices.getUserMedia(constraints);
         video.srcObject = stream;
         await video.play();
     } catch (err) {
-        console.error("Erro na primeira tentativa:", err);
+        console.error("Erro ao iniciar vídeo:", err);
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-                video: true
-            });
+            const stream = await navigator.mediaDevices.getUserMedia({ video: true });
             video.srcObject = stream;
             await video.play();
         } catch (err) {
-            console.error("Erro ao iniciar vídeo:", err);
+            console.error("Erro ao acessar a câmera:", err);
         }
     }
 }
 
-video.addEventListener("playing", () => {
+function createCanvas() {
     const canvas = faceapi.createCanvasFromMedia(video);
     canvas.style.position = 'absolute';
     canvas.style.top = '0';
     canvas.style.left = '0';
     document.body.append(canvas);
+    return canvas;
+}
 
-    function updateCanvasSize() {
-        const displaySize = {
-            width: video.clientWidth,
-            height: video.clientHeight
-        };
-        canvas.style.width = displaySize.width + 'px';
-        canvas.style.height = displaySize.height + 'px';
-        canvas.width = displaySize.width;
-        canvas.height = displaySize.height;
-        faceapi.matchDimensions(canvas, displaySize);
-        return displaySize;
-    }
+function updateCanvasSize(canvas) {
+    const displaySize = {
+        width: video.clientWidth,
+        height: video.clientHeight
+    };
+    canvas.style.width = `${displaySize.width}px`;
+    canvas.style.height = `${displaySize.height}px`;
+    canvas.width = displaySize.width;
+    canvas.height = displaySize.height;
+    faceapi.matchDimensions(canvas, displaySize);
+    return displaySize;
+}
 
-    let displaySize = updateCanvasSize();
+function drawDetections(detections, ctx, displaySize) {
+    const resizedDetections = faceapi.resizeResults(detections, displaySize);
+    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+    resizedDetections.forEach(detection => {
+        faceapi.draw.drawFaceLandmarks(ctx.canvas, [detection]);
+        const { box } = detection.detection;
+
+        ctx.strokeStyle = '#00ff00';
+        ctx.lineWidth = 2;
+        ctx.strokeRect(box.x, box.y, box.width, box.height);
+
+        const age = Math.round(detection.age);
+        const gender = detection.gender;
+        const emotion = Object.entries(detection.expressions)
+            .reduce((a, b) => a[1] > b[1] ? a : b)[0];
+            
+            const textX = box.x;
+            const textY = box.y + box.height + 10; // Ajustado para ficar abaixo da caixa
+            const padding = 4;
+    
+            // Desenhar fundo da caixa de informações
+            const boxHeight = 40; // Altura da caixa
+            const boxWidth = box.width; // Largura da caixa igual à largura do rosto
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'; // Cor de fundo
+            ctx.fillRect(textX, textY, boxWidth, boxHeight);
+    
+            // Configurações de estilo de texto
+            ctx.fillStyle = 'white';
+            ctx.font = '14px Arial'; // Tamanho da fonte
+    
+            // Desenhar informações na horizontal
+            const infoY = textY + padding + 20; // Y para o texto
+            ctx.fillText(`Idade: ${age}`, textX + padding, infoY);
+            ctx.fillText(`Gênero: ${gender === "male" ? "homem" : "mulher"}`, textX + boxWidth / 3 + padding, infoY);
+            ctx.fillText(`Emoção: ${emotion}`, textX + (2 * boxWidth) / 3 + padding, infoY);
+    });
+}
+
+video.addEventListener("playing", async () => {
+    await loadFaceApiModels();
+    const canvas = createCanvas();
+    let displaySize = updateCanvasSize(canvas);
+    const ctx = canvas.getContext("2d");
 
     window.addEventListener('resize', () => {
-        displaySize = updateCanvasSize();
+        displaySize = updateCanvasSize(canvas);
     });
 
     setInterval(async () => {
-        const detections = await faceapi.detectAllFaces(video)
+        const detections = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions())
             .withFaceLandmarks()
             .withFaceExpressions()
-            .withAgeAndGender();
+            .withAgeAndGender()
 
-        const resizedDetections = faceapi.resizeResults(detections, displaySize);
-        const ctx = canvas.getContext("2d");
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (detections.length) {
 
-        resizedDetections.forEach(detection => {
-            faceapi.draw.drawFaceLandmarks(canvas, [detection]);
-
-            const box = detection.detection.box;
-            ctx.strokeStyle = '#00ff00';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(box.x, box.y, box.width, box.height);
-
-            ctx.font = '16px Arial';
-            ctx.fillStyle = 'white';
-            ctx.textBaseline = 'top';
-
-            const age = Math.round(detection.age);
-            const gender = detection.gender;
-            const emotion = Object.entries(detection.expressions)
-                .reduce((a, b) => a[1] > b[1] ? a : b)[0];
-
-            const lineHeight = 20;
-            const padding = 4;
-            const textX = box.x;
-            const textY = box.y - (lineHeight * 3 + padding * 2);
-
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-            ctx.fillRect(
-                textX,
-                Math.max(0, textY),
-                Math.max(
-                    ctx.measureText(`Age: ${age}`).width,
-                    ctx.measureText(`Gender: ${gender}`).width,
-                    ctx.measureText(`Emotion: ${emotion}`).width
-                ) + padding * 2,
-                lineHeight * 3 + padding * 2
-            );
-
-            // Desenha os textos
-            ctx.fillStyle = 'white';
-            ctx.fillText(`Age: ${age}`, textX + padding, Math.max(0, textY) + padding);
-            ctx.fillText(`Gender: ${gender}`, textX + padding, Math.max(0, textY) + lineHeight + padding);
-            ctx.fillText(`Emotion: ${emotion}`, textX + padding, Math.max(0, textY) + lineHeight * 2 + padding);
-        });
+            drawDetections(detections, ctx, displaySize);
+        }
     }, 100);
 });
+
+loadFaceApiModels().then(startVideo);
