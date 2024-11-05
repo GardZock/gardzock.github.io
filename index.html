@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reconhecimento Facial</title>
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Face Recognition App</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
-    <h1>Reconhecimento Facial</h1>
+    <header>Face Recognition in the Browser</header>
     <div class="container">
-        <video id="video" autoplay></video>
-        <canvas id="canvas"></canvas>
+        <video id="video" height="500" width="500" autoplay muted></video>
     </div>
-    <div id="info"></div>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection"></script>
-    <script src="index.js"></script>
+    <div class="result-container">
+        <div id="emotion">Emotion</div>
+        <div id="gender">Gender</div>
+        <div id="age">Age</div>
+    </div>
+    <script src="./js/face-api.min.js"></script>
+    <script src="./js/main.js"></script>
 </body>
-
 </html>
