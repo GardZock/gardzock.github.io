@@ -116,7 +116,7 @@ video.addEventListener("playing", async () => {
 
             drawDetections(detections, ctx, displaySize);
         }
-    }, 1000);
+    }, 500);
 });
 
 loadFaceApiModels().then(startVideo);
